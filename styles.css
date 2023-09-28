@@ -34,6 +34,7 @@ header nav ul li {
 header nav ul li a {
     color: white;
     text-decoration: none;
+    text-decoration:underline;
 }
 
 .maincontainer {
@@ -49,6 +50,13 @@ header nav ul li a {
     height: 50vh;
     object-fit: cover;
 
+}
+
+.banner-background {
+    width: 100%;
+    height: 50vh;
+    background-image: url("/algorithm.jpg");
+    background-position: center;
 }
 
 .content {
