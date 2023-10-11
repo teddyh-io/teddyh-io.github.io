@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Joe's Hotdog Stand</title>
+</head>
+<body>
+    <h1>Welcome to Joe's Hotdog Stand!</h1>
+    <h2>Your order is below:</h2>
+    <div id="order-summary">
+    </div>
+
+    <script>
+        const prices = {
+            "Hotdogs": 3.75,
+            "Fries": 3,
+            "Soda": 2.5
+        };
+
+        // Massachusetts  tax
+        const TAX_RATE = 0.0625;
+
+        // Function to format number to currency
+        // https://stackoverflow.com/a/53378133/7760276
+        function formatCurrency(num) {
+        let rounded = num.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+        return "$" + rounded;
+        }
+
+        // Associative array for item quantities
+        let quantities = {
+            "Hotdogs": 0,
+            "Fries": 0,
+            "Soda": 0
+        };
+
+        // Associative array loop
+        // https://www.geeksforgeeks.org/how-to-get-a-list-of-associative-array-keys-in-javascript/#
+        for(let item in prices) {
+            quantities[item] = parseInt(prompt(`How many ${item.toLowerCase()} would you like?`));
+        }
+
+        let subtotal = 0;
+        for(let item in quantities) {
+            subtotal += prices[item] * quantities[item];
+        }
+
+        // Check for discount
+        let discount = 0;
+        if(subtotal >= 25) {
+            discount = subtotal * 0.10;
+            subtotal -= discount;
+        }
+
+        // Calculate tax and total
+        let taxAmount = subtotal * TAX_RATE;
+        let total = subtotal + taxAmount;
+
+        let summaryText = '';
+        for(let item in prices) {
+            summaryText += `<p>Number of ${item} ordered: ${quantities[item]} | Total: ${formatCurrency(prices[item] * quantities[item])}</p>`;
+        }
+
+        document.getElementById('order-summary').innerHTML = summaryText;
+
+        document.getElementById('order-summary').innerHTML += 
+        `
+            <p>Subtotal before discount: ${formatCurrency(subtotal + discount)}</p>
+            <p>Discount: ${formatCurrency(discount)}</p>
+            <p>Subtotal after discount: ${formatCurrency(subtotal)}</p>
+            <p>Tax Amount: ${formatCurrency(taxAmount)}</p>
+            <p>Final Total: ${formatCurrency(total)}</p>
+        `;
+
+    </script>
+</body>
+</html>

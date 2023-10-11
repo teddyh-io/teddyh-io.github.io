@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Joe's Hotdog Stand</title>
+</head>
+<body>
+    <h1>Welcome to Joe's Hotdog Stand!</h1>
+    <h2>Your order is below:</h2>
+    <div id="order-summary"></div>
+
+    <script>
+        // Constants for item prices
+        const HOTDOG_PRICE = 3.75;
+        const FRIES_PRICE = 3;
+        const SODA_PRICE = 2.5;
+        
+        // Massachusetts tax
+        const TAX_RATE = 0.0625;
+
+        // Function to format number to currency
+        // https://stackoverflow.com/a/53378133/7760276
+        function formatCurrency(num) {
+        let rounded = num.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+        return "$" + rounded;
+        }
+
+
+        // Getting quantities
+        let numDogs = prompt("How many hotdogs would you like?");
+        let numFries = prompt("How many fries would you like?");
+        let numSoda = prompt("How many sodas would you like?");
+        
+        // Calculate subtotal
+        let subtotal = (numDogs * HOTDOG_PRICE) + (numFries * FRIES_PRICE) + (numSoda * SODA_PRICE);
+        
+        // Check for discount
+        let discount = 0;
+        if(subtotal >= 25) {
+                //JOES SPECIAL DISCOUNT!!!!!! WOOHOO
+            discount = subtotal * 0.10;
+            subtotal -= discount;
+        }
+
+        // Calculate tax and total
+        let taxAmount = subtotal * TAX_RATE;
+        let total = subtotal + taxAmount;
+
+        // Display order information
+        document.getElementById('order-summary').innerHTML = `
+            <p>Hotdogs ordered: ${numDogs} Total: ${formatCurrency(numDogs * HOTDOG_PRICE)}</p>
+            <p>Fries ordered: ${numFries} Total: ${formatCurrency(numFries * FRIES_PRICE)}</p>
+            <p>Sodas ordered: ${numSoda} Total: ${formatCurrency(numSoda * SODA_PRICE)}</p>
+            <p>Subtotal before discount: ${formatCurrency(subtotal + discount)}</p>
+            <p>JOES SPECIAL DISCOUNT!: ${formatCurrency(discount)}</p>
+            <p>Subtotal after discount: ${formatCurrency(subtotal)}</p>
+            <p>Tax Amount: ${formatCurrency(taxAmount)}</p>
+            <p>Final Total: ${formatCurrency(total)}</p>
+        `;
+    </script>
+</body>
+</html>
