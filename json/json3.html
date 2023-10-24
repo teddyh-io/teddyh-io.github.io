@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JSON3</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+        .header {
+            text-align: center;
+            font-size: 2em;
+            font-family: sans-serif;
+        }
+        /* Center form elements */
+        #filterForm {
+            text-align: center;
+            margin-top: 2em;
+        }
+        
+        /* Style the select dropdown and the button */
+        #category, #filterBtn {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        
+        #filterBtn {
+            cursor: pointer;
+            background-color: #b6ff9d;
+            color: black;
+            border: none;
+        }
+        
+        /* Style the div where filtered products are displayed */
+        #filteredProducts {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin-top: 2em;
+        }
+  </style>
+      
+</head>
+<body>
+    <p class="header">Choose a category:</p>
+  <form id="filterForm">
+    <select id="category">
+    </select>
+    <button type="submit" id="filterBtn">Filter</button>
+  </form>
+  
+  <div id="filteredProducts">
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      let allCategories = new Set();
+      let products;
+
+      $.get('products.json', function(data) {
+        products = data.products;
+
+        // Get unique categories
+        products.forEach(product => {
+            product.categories.forEach(category => {
+                allCategories.add(category);
+            });
+        });
+
+        allCategories.forEach(category => {
+            $('#category').append(`<option value="${category}">${category}</option>`);
+        });
+      });
+
+      // Event handler for the form
+      $('#filterForm').on('submit', function(event) {
+        //Form shouldn't actually submit anything
+        event.preventDefault();
+        
+        $('#filteredProducts').empty();
+        
+        let selectedCategory = $('#category').val();
+
+        // Filter products based on selected category
+        let filteredProducts = products.filter(product => product.categories.includes(selectedCategory));
+        
+        filteredProducts.forEach(product => {
+            $('#filteredProducts').append(`<div>${product.name}</div>`);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,1 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JSON 1</title>
+  <script>
+    const officeProducts = [
+    {
+        "id": 1,
+        "name": "Stapler",
+        "price": 12.99,
+        "categories": ["Office Tools", "Essentials"],
+        "description": "A sturdy stapler with a 20-sheet capacity."
+    },
+    {
+        "id": 2,
+        "name": "Printer Paper",
+        "price": 7.99,
+        "categories": ["Paper Goods"],
+        "description": "500 sheets of printer-friendly paper."
+    },
+    {
+        "id": 3,
+        "name": "Pen",
+        "price": 1.99,
+        "categories": ["Office Tools"],
+        "description": "A smooth-writing ballpoint pen."
+    },
+    {
+        "id": 4,
+        "name": "Notepad",
+        "price": 4.99,
+        "categories": ["Paper Goods"],
+        "description": "A 100-sheet notepad."
+    },
+    {
+        "id": 5,
+        "name": "Whiteboard Marker",
+        "price": 2.99,
+        "categories": ["Office Tools", "Stationery"],
+        "description": "A dry-erase marker for whiteboards."
+    },
+    {
+        "id": 6,
+        "name": "Paper Clip",
+        "price": 0.99,
+        "categories": ["Office Tools"],
+        "description": "A pack of 100 paper clips."
+    },
+    {
+        "id": 7,
+        "name": "Desk Lamp",
+        "price": 19.99,
+        "categories": ["Furniture"],
+        "description": "An adjustable LED desk lamp."
+    },
+    {
+        "id": 8,
+        "name": "Office Chair",
+        "price": 79.99,
+        "categories": ["Furniture"],
+        "description": "An ergonomic office chair."
+    },
+    {
+        "id": 9,
+        "name": "File Cabinet",
+        "price": 119.99,
+        "categories": ["Furniture"],
+        "description": "A 3-drawer file cabinet."
+    },
+    {
+        "id": 10,
+        "name": "Highlighter",
+        "price": 3.99,
+        "categories": ["Office Tools", "Stationery"],
+        "description": "A pack of 5 multi-colored highlighters."
+    },
+    {
+        "id": 11,
+        "name": "Cork Board",
+        "price": 24.99,
+        "categories": ["Furniture", "Essentials"],
+        "description": "A medium-sized cork board for notices."
+    },
+    {
+        "id": 12,
+        "name": "Keyboard",
+        "price": 49.99,
+        "categories": ["Electronics"],
+        "description": "A wireless keyboard."
+    }
+    ];
 
+
+    const jsonString = JSON.stringify(officeProducts, null, 2);
+
+    window.onload = function () {
+      document.getElementById('jsonString').innerText = jsonString;
+    };
+  </script>
+</head>
+<body>
+  <h1>Raw JSON Data:</h1>
+  <p id="jsonString"></p>
+</body>
+</html>

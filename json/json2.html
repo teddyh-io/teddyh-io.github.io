@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JSON2</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    #products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .product {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin: 10px;
+        border-radius: 5px;
+        font-family: sans-serif;
+    }
+    .product-name {
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+    .product-description {
+        margin: 10px 0;
+    }
+    .product-categories, .product-price {
+        font-style: italic;
+    }
+    .header {
+        font-size: 2em;
+        font-family: sans-serif;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+  <h1 class="header">Browse our wonderful selection of products!</h1>
+  <div id="products">
+  </div>
+
+  <script>
+    let modify;
+    $(document).ready(function() {
+        $.get('/products.json', function(data) {
+        // For Loop through the JSON object
+        data.products.forEach(function(product) {
+            let productDiv = $('<div class="product"></div>');
+            
+            productDiv.append('<div class="product-name">' + product.name + '</div>');
+            productDiv.append('<div class="product-description">' + product.description + '</div>');
+            productDiv.append('<div class="product-categories">Categories: ' + product.categories.join(", ") + '</div>');
+            productDiv.append('<div class="product-price">Price: $' + product.price.toFixed(2) + '</div>');
+
+            $('#products').append(productDiv);
+        });
+        });
+    });
+  </script>
+</body>
+</html>
