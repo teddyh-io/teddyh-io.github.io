@@ -41,7 +41,7 @@
   <script>
     let modify;
     $(document).ready(function() {
-        $.get('/products.json', function(data) {
+        $.get('/json/products.json', function(data) {
         // For Loop through the JSON object
         data.products.forEach(function(product) {
             let productDiv = $('<div class="product"></div>');

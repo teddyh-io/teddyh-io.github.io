@@ -56,7 +56,7 @@
       let allCategories = new Set();
       let products;
 
-      $.get('products.json', function(data) {
+      $.get('/json/products.json', function(data) {
         products = data.products;
 
         // Get unique categories
